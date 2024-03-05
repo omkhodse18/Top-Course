@@ -12,23 +12,40 @@ const App = () => {
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function fetchData(){
+  // async function fetchData(){
 
-    setLoading(true);
+  //   setLoading(true);
 
-    try {
-      let response = await fetch(apiUrl);
-      let output = await response.json();
-      setCourses(output);
-    } catch (error) {
-      Toast.error("Something went wrong");
-      // console.log("Something went wrong");
+  //   try {
+  //     let response = await fetch(apiUrl);
+  //     let output = await response.json();
+  //     setCourses(output.data);
+  //   } catch (error) {
+  //     Toast.error("Something went wrong");
+  //     // console.log("Something went wrong");
+  //   }
+
+  //   setLoading(false);
+  // }
+
+  useEffect( () => {
+    async function fetchData(){
+
+      setLoading(true);
+  
+      try {
+        let response = await fetch(apiUrl);
+        let output = await response.json();
+        setCourses(output.data);
+      } catch (error) {
+        Toast.error("Something went wrong");
+        // console.log("Something went wrong");
+      }
+  
+      setLoading(false);
     }
-
-    setLoading(false);
-  }
-
-  useEffect( () => fetchData(), []);
+    fetchData()
+  }, []);
 
   return (
   <div>
@@ -43,7 +60,7 @@ const App = () => {
 
     <div>
       {
-        loading ? (<Spinner></Spinner>) : (<Cards></Cards>)
+        loading ? (<Spinner></Spinner>) : (<Cards courses={courses}></Cards>)
       }
     </div>
 
