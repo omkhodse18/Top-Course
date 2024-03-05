@@ -48,20 +48,24 @@ const App = () => {
   }, []);
 
   return (
-  <div>
+  <div className="min-h-screen flex flex-col">
     
     <div>
       <Navbar></Navbar>
     </div>
 
-    <div>
-      <Filter filterData={filterData}></Filter>
-    </div>
+    <div className="bg-bgDark2">
 
-    <div>
-      {
-        loading ? (<Spinner></Spinner>) : (<Cards courses={courses}></Cards>)
-      }
+      <div>
+        <Filter filterData={filterData}></Filter>
+      </div>
+
+      <div className="w-11/12 max-w-[1200px] mx-auto flex flex-wrap justify-center items-center min-h-[50vh]">
+        {
+          loading ? (<Spinner></Spinner>) : (<Cards courses={courses}></Cards>)
+        }
+      </div>
+
     </div>
 
   </div>);
