@@ -5,20 +5,24 @@ function Cards(props) {
 
   const [likedCourses, setLikedCourses] = useState([]);
 
-
+  let category = props.category;
   let courses = props.courses;
-  console.log(courses);
 
   function getCourses(){
-    let allCourses = [];
-
-    Object.values(courses).forEach( (course) => {
-      course.forEach((courseData) =>{
-        allCourses.push(courseData);
+    if(category == "All"){
+      let allCourses = [];
+  
+      Object.values(courses).forEach( (course) => {
+        course.forEach((courseData) =>{
+          allCourses.push(courseData);
+        })
       })
-    })
-    
-    return allCourses;
+      
+      return allCourses;
+    }
+    else{
+      return courses[category];
+    }
   }
 
   return (
