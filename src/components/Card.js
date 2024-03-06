@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import {FcLike} from "react-icons/fc"
 import { BiLike , BiSolidLike} from "react-icons/bi";
 import { toast } from 'react-toastify';
 
 function Card(props) {
+  const [readMore, setReadMore] = useState(false);
+
   let Toast = toast;
   let course = props.course;
   let likedCourses = props.likedCourses;
   let setLikedCourses = props.setLikedCourses;
+
+  // let description = course.description;
+  const description = readMore ? course.description : `${course.description.substring(0,100)}...` ; 
 
   function clickHandler(){
     if(likedCourses.includes(course.id)){
@@ -53,7 +58,16 @@ function Card(props) {
 
       <div className='p-4'>
         <p className="text-white font-semibold text-lg leading-6">{course.title}</p>
-        <p className='mt-2 text-white'>{course.description}</p>
+        
+        <p className='mt-2 text-white'>
+          {description} 
+          <span className='font-semibold cursor-pointer text-sky-400' onClick={() => setReadMore(!readMore)}>
+            {
+              readMore ? `Show Less` : `Read More`
+            }
+          </span>
+        </p>
+
       </div>
 
     </div>
